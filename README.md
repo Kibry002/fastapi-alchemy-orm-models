@@ -71,7 +71,7 @@ This is the Swagger UI where you can test things like:
 * `GET /books/search`
 
 
-## Notes (important-ish)
+## Notes
 
 * `POST /books` → creates a new book in the database
 * `POST /categories` → creates a category
