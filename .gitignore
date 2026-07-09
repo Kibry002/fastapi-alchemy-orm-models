@@ -1,0 +1,30 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+.Python
+
+# Virtual environment
+/bookstore-env/
+
+# Library API artifacts
+/library-api/__pycache__/
+/library-api/*.pyc
+/library-api/*.pyo
+
+# Environment files
+.env
+library-api/.env
+
+# Editor and OS files
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Docker compose overrides
+docker-compose.override.yml

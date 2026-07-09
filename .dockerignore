@@ -1,0 +1,23 @@
+# Ignore Python cache
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/*.pyd
+**/*.pyc
+
+# Ignore virtual environment
+bookstore-env/
+
+# Ignore environment files
+.env
+library-api/.env
+
+# Ignore Git metadata
+.git
+.gitignore
+
+# Ignore editor files
+.vscode/
+.idea/
+*.swp
+*~
