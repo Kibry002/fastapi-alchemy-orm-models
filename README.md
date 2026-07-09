@@ -1,34 +1,36 @@
 # py-bookstore-api
 
-This is a simple library API built with FastAPI and SQLModel. It stores books and categories in PostgreSQL, and it is designed to be easy to run locally for your assignment.
+This is a simple library API I built using FastAPI and SQLModel. It stores books and categories in a PostgreSQL database. The main goal was just to make something simple that runs locally for lab 4 assignment.
 
-## What this project contains
+## What’s inside this project
 
-- `library-api/main.py` — the FastAPI application
-- `library-api/models/book.py` — book data model
-- `library-api/models/category.py` — category data model
-- `library-api/database/session.py` — database session setup
-- `library-api/docker-compose.yml` — PostgreSQL service definition
-- `.env` — database connection configuration
+* `library-api/main.py` — the main FastAPI app
+* `library-api/models/book.py` — defines the book model
+* `library-api/models/category.py` — defines the category model
+* `library-api/database/session.py` — handles the database connection/session stuff
+* `library-api/docker-compose.yml` — used to spin up PostgreSQL with Docker
+* `.env` — holds the database connection string
 
-## Running the project locally
+## Running it locally
 
-### 1. Make sure PostgreSQL is available
+### 1. Make sure PostgreSQL is running
 
-This project uses the database URL from `library-api/.env`:
+The app uses the database URL from `library-api/.env`:
 
 ```env
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/library_db
 ```
 
-If you want to use Docker to run PostgreSQL, go into the `library-api` folder and start the service:
+If you don’t already have PostgreSQL running, you can just use Docker. From inside the `library-api` folder:
 
 ```bash
 cd library-api
 docker compose up -d
 ```
 
-### 2. Activate the Python virtual environment
+That should start the DB in the background.
+
+### 2. Activate your virtual environment
 
 From the project root:
 
@@ -36,9 +38,9 @@ From the project root:
 source bookstore-env/bin/activate
 ```
 
-### 3. Install dependencies (if needed)
+### 3. Install dependencies (if you havent already)
 
-If you have not already installed the app dependencies, install them inside the virtual environment. For example:
+Inside the virtual environment, install the required packages:
 
 ```bash
 pip install fastapi uvicorn sqlmodel psycopg2-binary python-dotenv
@@ -46,37 +48,53 @@ pip install fastapi uvicorn sqlmodel psycopg2-binary python-dotenv
 
 ### 4. Start the API server
 
-From the `library-api` folder:
+Go into the `library-api` folder and run:
 
 ```bash
 cd library-api
-uvicorn main:app --reload --port 8000
+uvicorn main:app --reload --port 8000(or any random port)
 ```
 
+If port 8000 is already in use
 ### 5. Open the API docs
 
-In your browser, go to:
+Open your browser and go to:
 
 ```
 http://127.0.0.1:8000/docs
 ```
 
-This is where you can test endpoints like `POST /books`, `GET /books`, and `GET /books/search`.
+This is the Swagger UI where you can test things like:
 
-## Notes for the assignment
+* `POST /books`
+* `GET /books`
+* `GET /books/search`
 
-- `POST /books` creates a new book record in PostgreSQL.
-- `POST /categories` creates a category record.
-- `GET /books/search` searches by query, author, and title.
-- The project automatically creates database tables on startup via `SQLModel.metadata.create_all(engine)`.
 
-## Tips
+## Notes (important-ish)
 
-- If you make any code changes, restart the uvicorn server or use `--reload`.
-- If the database schema changes, you may need to drop and recreate tables or restart the DB service.
-- If you use pgAdmin, connect to the database at `localhost:5432` using `postgres` / `postgres`.
+* `POST /books` → creates a new book in the database
+* `POST /categories` → creates a category
+* `GET /books/search` → lets you search by title, author, etc
 
-## Git / Docker ignore files
+The tables are created automatically when the app starts using:
+`SQLModel.metadata.create_all(engine)`
 
-- `.gitignore` hides local files like the virtual environment, Python cache, and `.env`.
-- `.dockerignore` ignores the same local files when building or using Docker contexts.
+So you dont have to manually create them.
+
+## NB
+
+* If you change the code, restart the server (unless you're using `--reload`)
+* If you change models, you might need to drop and recreate the tables 
+* If you're using pgAdmin, connect using:
+
+  * host: `localhost`
+  * port: `5432`
+  * user: `postgres`
+  * password: `postgres`
+
+## Git / Docker ignore stuff
+
+* `.gitignore` is there to avoid pushing things like your virtual env, cache files, and `.env` (dont leak secrets)
+* `.dockerignore` does the same thing but for Docker builds
+
