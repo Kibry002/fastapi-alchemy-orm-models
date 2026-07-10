@@ -1,4 +1,4 @@
-# py-bookstore-api
+# py-bookstore-api - C027-01-2798/2024
 
 This is a simple library API I built using FastAPI and SQLModel. It stores books and categories in a PostgreSQL database. The main goal was just to make something simple that runs locally for lab 4 assignment.
 
